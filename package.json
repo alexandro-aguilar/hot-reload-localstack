@@ -5,17 +5,22 @@
     "hot-reload-localstack": "bin/hot-reload-localstack.js"
   },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
-    "cdk": "cdk"
+    "build": "ts-node esbuild.ts",
+    "build:local": "ts-node esbuild.config.ts --watch",
+    "cdk": "cdk",
+    "bootstrap:local": "cdklocal bootstrap --verbose",
+    "localstack": "docker ps -aq --filter name=localstack_habitapp-core | xargs docker stop && docker ps -aq --filter name=localstack_habitapp-core | xargs docker stop && docker ps -aq --filter name=localstack_habitapp-core | xargs docker rm && docker ps -aq --filter name=localstack_habitapp-core | xargs docker rm && docker-compose up",
+    "deploy:local": "rm -rf cdk.out/ && npx cdklocal deploy --verbose"
   },
   "devDependencies": {
+    "@types/aws-lambda": "^8.10.152",
     "@types/jest": "^29.5.14",
     "@types/node": "22.7.9",
+    "aws-cdk": "2.1022.0",
+    "aws-cdk-local": "^3.0.1",
+    "esbuild": "^0.25.8",
     "jest": "^29.7.0",
     "ts-jest": "^29.2.5",
-    "aws-cdk": "2.1022.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.6.3"
   },

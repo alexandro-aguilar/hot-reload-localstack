@@ -1,0 +1,21 @@
+services:
+  localstack:
+    container_name: 'localstack_galactic-quiz-core'
+    image: localstack/localstack:latest
+    ports:
+      - '127.0.0.1:4566:4566' # LocalStack Gateway
+      - '127.0.0.1:4510-4559:4510-4559' # External services port range
+    environment:
+      - DEBUG=${DEBUG-}
+      - HOST_LAMBDA_DIR=${PWD}
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    networks:
+      - localnet
+    volumes:
+      - '${LOCALSTACK_VOLUME_DIR:-./volume/localstack}:/var/lib/localstack'
+      - '/var/run/docker.sock:/var/run/docker.sock'
+
+networks:
+  localnet:
+    name: localnet
+    driver: bridge

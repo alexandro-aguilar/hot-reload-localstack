@@ -16,6 +16,5 @@ export class HotReloadLocalstackStack extends cdk.Stack {
       code: Code.fromBucket(Bucket.fromBucketName(this, 'HotReloadBucket', 'hot-reload'), resolve(__dirname, '../.dist/src/')),
       environment: { NODE_ENV: 'local' },
     });
-    console.log(resolve(__dirname, '../.dist/src/'));
   }
 }

@@ -5,7 +5,7 @@ export const handler = async (event: APIGatewayProxyEventV2): Promise<APIGateway
   return {
     statusCode: 200,
     body: JSON.stringify({
-      message: 'Hello from Hot Reload Localstack!',
+      message: 'Hello',
       input: event,
     }),
     headers: {
